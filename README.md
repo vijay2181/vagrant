@@ -128,7 +128,7 @@ C:\Users\vijay>curl http://127.0.0.1:8000
 <html><body><h1>It works!</h1></body></html>
 ```
 
-open browser in windows host machine **http://localhost:8000 **
+open browser in windows host machine **http://localhost:8000**
 
 
 ![image](https://github.com/vijay2181/vagrant/assets/66196388/c8dda8c0-3cd8-4665-b1d6-54858120b683)
