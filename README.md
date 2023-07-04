@@ -39,20 +39,25 @@ means that ip is not assigned to any other device in your network
 
 ##Vgarntfile with Port Forwarding
 
-For example, to install Docker and Docker Compose, and run an Apache container inside your Vagrant VM, you can modify your Vagrantfile as follows:
+For example, to install Docker and Docker Compose, and run an Apache container inside your Vagrant VM, vagrant is installed on windows, you can modify your Vagrantfile as follows:
 
-To access the Apache server running inside the VM from your host machine, you can set up port forwarding in the Vagrantfile.
+To access the Apache server running inside the container of the VM(host machine), container is guest to VM(host machine), but overall host is windows, you can set up port forwarding in the Vagrantfile.
 
 ```
 config.vm.network "forwarded_port", guest: 80, host: 8080
 ```
 
-This line sets up port forwarding, where port 80 of the VM (guest) is mapped to port 8080 of the host machine. You can modify the host port to any available port on your host machine if necessary.
+This line sets up port forwarding, where port 80 of the conatiner is mapped to port 8080 of the VM(host machine). You can modify the host port to any available port on your host machine if necessary.
 
 Once the VM is running, you can access the Apache server from your host machine by visiting **http://localhost:8080** or **http://127.0.0.1:8080/**
-in a web browser. The traffic will be forwarded to port 80 of the VM, where the Apache server is listening.
+in a web browser. The traffic will be forwarded to port 80 of the container, where the Apache server is listening.
 
 Please note that if port 8080 is already in use on your host machine, you'll need to choose a different port for the forwarding.
+
+```
+# To check open ports in linux machine
+netstat -tulpn
+```
 
 ```
 # -*- mode: ruby -*-
@@ -101,4 +106,9 @@ run docker container inside virtualmachine
 ```
 # Run Apache container
 sudo docker run -d -p 8080:80 --name apache httpd:latest
+```
+
+```
+vagrant@ubuntu-focal:~$ curl http://localhost:8080
+<html><body><h1>It works!</h1></body></html>
 ```
