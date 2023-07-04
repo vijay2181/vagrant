@@ -49,7 +49,8 @@ config.vm.network "forwarded_port", guest: 80, host: 8080
 
 This line sets up port forwarding, where port 80 of the VM (guest) is mapped to port 8080 of the host machine. You can modify the host port to any available port on your host machine if necessary.
 
-Once the VM is running, you can access the Apache server from your host machine by visiting **http://localhost:8080** in a web browser. The traffic will be forwarded to port 80 of the VM, where the Apache server is listening.
+Once the VM is running, you can access the Apache server from your host machine by visiting **http://localhost:8080** or **http://127.0.0.1:8080/**
+in a web browser. The traffic will be forwarded to port 80 of the VM, where the Apache server is listening.
 
 Please note that if port 8080 is already in use on your host machine, you'll need to choose a different port for the forwarding.
 
