@@ -1,5 +1,11 @@
 # vagrant
 
+create one folder in windows and go inside that folder, do
+```
+vagrant init
+```
+one Vagrantfile will be created and copy the repo Vagrantfile and paste there
+
 If you need both a static IP address and internet access for your Vagrant virtual machine, you can configure a private network with a static IP
 
 By specifying a static IP address in the Vagrantfile, your Ubuntu virtual machine will be assigned the provided IP address within the private network.
