@@ -32,12 +32,12 @@ it means any other devcie in your network is assigned with that ip and it is tim
 ```
 C:\Users\Vanuganti>ping 192.168.50.100
 
-Pinging 192.168.0.100 with 32 bytes of data:
+Pinging 192.168.50.100 with 32 bytes of data:
 Reply from 192.168.0.212: Destination host unreachable.
 ```
 means that ip is not assigned to any other device in your network
 
-##Vagrantfile with Port Forwarding
+## Vagrantfile with Port Forwarding
 
 For example, to install Docker and Docker Compose, and run an Apache container inside your Vagrant VM, vagrant is installed on windows, you can modify your Vagrantfile as follows:
 
