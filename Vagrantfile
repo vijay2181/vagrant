@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "ubuntu/focal64"
 
-  config.vm.network "private_network", ip: "192.168.0.100"
+  config.vm.network "private_network", ip: "192.168.50.100"
 
   config.vm.network "forwarded_port", guest: 4000, host: 8000
 
@@ -32,9 +32,6 @@ Vagrant.configure("2") do |config|
    # Install Docker Compose
    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
    sudo chmod +x /usr/local/bin/docker-compose
-
-   # Run Apache container
-   sudo docker run -d -p 80:80 --name apache httpd:latest
 
   SHELL
 end
