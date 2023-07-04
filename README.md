@@ -36,3 +36,64 @@ Pinging 192.168.0.100 with 32 bytes of data:
 Reply from 192.168.0.212: Destination host unreachable.
 ```
 means that ip is not assigned to any other device in your network
+
+##Vgarntfile with Port Forwarding
+
+For example, to install Docker and Docker Compose, and run an Apache container inside your Vagrant VM, you can modify your Vagrantfile as follows:
+
+To access the Apache server running inside the VM from your host machine, you can set up port forwarding in the Vagrantfile.
+
+```
+config.vm.network "forwarded_port", guest: 80, host: 8080
+```
+
+This line sets up port forwarding, where port 80 of the VM (guest) is mapped to port 8080 of the host machine. You can modify the host port to any available port on your host machine if necessary.
+
+Once the VM is running, you can access the Apache server from your host machine by visiting **http://localhost:8080** in a web browser. The traffic will be forwarded to port 80 of the VM, where the Apache server is listening.
+
+Please note that if port 8080 is already in use on your host machine, you'll need to choose a different port for the forwarding.
+
+```
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box = "ubuntu/focal64"
+
+  config.vm.network "private_network", ip: "192.168.0.100"
+
+  config.vm.network "forwarded_port", guest: 80, host: 8080
+
+  config.vm.provider :virtualbox do |vb|
+    vb.customize ["modifyvm", :id, "--memory", "2048"]
+    vb.customize ["modifyvm", :id, "--cpus", "2"]
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
+    vb.name = "VAGRANT-BOX"
+  end
+
+  config.vm.provision "shell", inline: <<-SHELL
+   sudo apt-get update -y
+   sudo apt-get -y upgrade
+
+   # Install python3
+   sudo apt install -y python3-pip
+   sudo apt install -y build-essential libssl-dev libffi-dev python3-dev
+   sudo apt install -y python3-venv
+
+   # Install Docker
+   curl -fsSL https://get.docker.com -o get-docker.sh
+   sudo sh get-docker.sh
+   sudo usermod -aG docker vagrant
+
+   # Install Docker Compose
+   sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+   sudo chmod +x /usr/local/bin/docker-compose
+
+   # Run Apache container
+   sudo docker run -d -p 80:80 --name apache httpd:latest
+
+  SHELL
+end
+```
