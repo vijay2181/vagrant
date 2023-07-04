@@ -91,9 +91,13 @@ Vagrant.configure("2") do |config|
    sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
    sudo chmod +x /usr/local/bin/docker-compose
 
-   # Run Apache container
-   sudo docker run -d -p 80:80 --name apache httpd:latest
-
   SHELL
 end
+```
+
+run docker container inside virtualmachine
+
+```
+# Run Apache container
+sudo docker run -d -p 8080:80 --name apache httpd:latest
 ```
