@@ -152,10 +152,12 @@ VAGRANT KEYS:
   ```
   cd D:\VIJAY-PERSONAL-BOX\.vagrant\machines\default\virtualbox
   ssh -i private_key vagrant@192.168.50.100
-  ``
+  ```
+
 
   PASSWORD BASED:
   ---------------
+  
   - if you want to enable password based login to your machine, then add below lines into your Vagrantfile
   
   ```
